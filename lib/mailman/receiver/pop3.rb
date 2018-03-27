@@ -46,7 +46,7 @@ module Mailman
       def get_messages
         @connection.each_mail do |message|
           begin
-            @processor.process(message.pop)
+            @processor.process(message.pop(''.dup))
           rescue StandardError => error
             Mailman.logger.error "Error encountered processing message: #{message.inspect}\n #{error.class.to_s}: #{error.message}\n #{error.backtrace.join("\n")}"
             next
